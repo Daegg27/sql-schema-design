@@ -1,0 +1,103 @@
+
+
+------------------Below contains the grubhub portion---------------------------
+
+orders
+-------
+id serial PK
+user_id FK >- users.id
+timestamp varchar
+
+users
+-------
+id serial PK
+email varchar
+username varchar UNIQUE
+password varchar
+
+menuItems
+----------------
+id serial PK
+restaurant_id FK >- restaurants.id
+name varchar
+price varchar
+
+orderMenuItem
+-----
+order_id FK >- orders.id
+menu_item_id FK >- menuItems.id
+quantity int
+
+restaurants
+----
+id serial PK
+name varchar
+
+------Below contains the Blue Apron portion------------
+
+users
+---------
+id serial PK
+username varchar UNIQUE 
+password varchar
+email varchar
+address varchar
+promotion_id FK >- promotion.id
+
+recipes
+-----------
+id serial PK
+name varchar
+description varchar
+
+services 
+---
+id serial PK
+recipe_id FK >- recipes.id
+servings int
+meals_per_week int
+price int
+
+delivery 
+----
+id serial PK
+user_id FK >- users.id
+services_id FK >- services.id
+
+promotion 
+------
+id serial PK
+services_id FK >- services.id NOT NULL
+discounted_price int
+
+--------------Below contains the Instagram portion--------------------------------
+
+users 
+---
+id serial PK
+username varchar UNIQUE
+password varchar
+email varchar
+
+posts
+-------
+id serial PK
+user_id FK >- users.id
+description varchar
+like_id FK -< likes.id
+
+comments 
+---
+id serial PK
+post_id FK >- posts.id
+users_id FK >- users.id
+like_id FK -< likes.id
+
+likes
+-----
+id serial PK
+user_id FK >- users.id
+
+follows
+-----
+id serial PK
